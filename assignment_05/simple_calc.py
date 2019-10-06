@@ -52,6 +52,10 @@ Error Conditions:
 """
 
 import operator
+import sys
+
+if sys.version[0] == 2:
+    input = raw_input
 
 # ------------------------------------------------------------------------
 # Constants
@@ -63,10 +67,14 @@ import operator
 # ------------------------------------------------------------------------
 
 operators = {
-    "+" : operator.add,
-    "-" : operator.sub,
-    "*" : operator.mul,
-    "/" : operator.truediv
+    "+"           : operator.add,
+    "-"           : operator.sub,
+    "*"           : operator.mul,
+    "/"           : operator.truediv,
+    ">>"          : operator.rshift,
+    "<<"          : operator.lshift,
+    "%"           : operator.mod,
+    "**"          : operator.pow
 }
 
 # ------------------------------------------------------------------------
@@ -77,9 +85,10 @@ def get_user_input():
     """Will return (number, number, operator) or (None, None, None) on error"""
     
     try:
-        number1 = float(input("Enter the first number: "))
-        number2 = float(input("Enter the second number: "))
-        op      = input("Enter an operator (valid operators are +, -, *, and /): ")
+    
+        number1 = int(input("Enter the first number: "))
+        number2 = int(input("Enter the second number: "))
+        op      = input("Enter an operator (valid operators are +, -, *, /, >>, <<, %, **): ")
         
         print(number1)
         print(number2)
