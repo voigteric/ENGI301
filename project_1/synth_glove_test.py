@@ -55,7 +55,7 @@ import os
 # Global Variables
 # ------------------------------------------------------------------------
 
-debug       = True
+debug       = False
 
 update_time = 0.025
 
@@ -82,6 +82,16 @@ def setup():
 
 def play_sounds(thumb_flex, thumb_prev, index_flex, index_prev, middle_flex, middle_prev, ring_flex, ring_prev, pinky_flex, pinky_prev):
     """check to see change in finger flex. if so, play associated sound"""
+    if (thumb_flex >= 0.65)  and (thumb_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/808.wav")
+    if (index_flex >= 0.65)  and (index_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/tom.wav")
+    if (middle_flex >= 0.65) and (middle_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/snare.wav")
+    if (ring_flex >= 0.65)   and (ring_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/hi_hat.wav")
+    if (pinky_flex >= 0.65)  and (pinky_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/hand_clap.wav")
 
 # ------------------------------------------------------------------------
 # Main script
@@ -90,6 +100,12 @@ def play_sounds(thumb_flex, thumb_prev, index_flex, index_prev, middle_flex, mid
 if __name__ == '__main__':
     setup()
     print("Synth Glove Testbed Program Start")
+    
+    t_p = 0
+    i_p = 0
+    m_p = 0
+    r_p = 0
+    p_p = 0
 
     while True:
         """scale and print the potentiometer signals for testing"""
