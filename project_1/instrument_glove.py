@@ -1,6 +1,6 @@
 """
 --------------------------------------------------------------------------
-Keyboard Glove
+Instrument Glove
 --------------------------------------------------------------------------
 License:   
 Copyright 2019 - Eric Voigt
@@ -30,7 +30,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------
-Modulate sound output with variable flex input
+Modulate sound output with potentiometer input
 
   - Potentiometer signals connected to AIN0, AIN1, AIN2, AIN3, AIN4
   - USB audio adapter connected to USB1 (P1_5, P1_7, P1_9, P1_11, P1_13, P1_15)
@@ -49,23 +49,24 @@ Background:
 
 import time
 import Adafruit_BBIO.ADC as ADC
+import os
 
 # ------------------------------------------------------------------------
 # Global Variables
 # ------------------------------------------------------------------------
 
-debug       = True
+debug       = False
 
-update_time = 0.1
+update_time = 0.025
 
 # ------------------------------------------------------------------------
 # Pin Assignments
 # ------------------------------------------------------------------------
 
 # Analog setup for flex sensing
-A_THUMB   = "P1_27"                      # AIN_4
-A_INDEX   = "P1_25"                      # AIN_3
-A_MIDDLE  = "P1_23"                      # AIN_2
+A_INDEX   = "P1_27"                      # AIN_4
+A_MIDDLE  = "P1_25"                      # AIN_3
+A_THUMB   = "P1_23"                      # AIN_2
 A_RING    = "P1_21"                      # AIN_1
 A_PINKY   = "P1_19"                      # AIN_0
 
@@ -74,26 +75,23 @@ A_PINKY   = "P1_19"                      # AIN_0
 # ------------------------------------------------------------------------
 
 def setup():
-    """Set up the hardware components."""
+    """set up the hardware components"""
     ADC.setup()
 
 # end def
 
-# ------------------------------------------------------------------------
-
-def print_pots(A_THUMB, A_INDEX, A_MIDDLE, A_RING, A_PINKY):
-    """Scale and print the potentiometer signals for testing."""
-    thumb_flex           = float(ADC.read(A_THUMB))
-    index_flex           = float(ADC.read(A_INDEX))
-    middle_flex          = float(ADC.read(A_MIDDLE))
-    ring_flex            = float(ADC.read(A_RING))
-    pinky_flex           = float(ADC.read(A_PINKY))
-
-    
-    if (debug):
-        print("thumb = {0}; index = {1}; middle = {2}; ring = {3}; pinky = {4}".format(thumb_flex, index_flex, middle_flex, ring_flex, pinky_flex))
-
-# end def
+def play_sounds(thumb_flex, thumb_prev, index_flex, index_prev, middle_flex, middle_prev, ring_flex, ring_prev, pinky_flex, pinky_prev):
+    """check to see change in finger flex. if so, play associated sound"""
+    if (thumb_flex >= 0.6)  and (thumb_prev < 0.6):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/808.wav")
+    if (index_flex >= 0.65)  and (index_prev < 0.65):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/tom.wav")
+    if (middle_flex >= 0.55) and (middle_prev < 0.55):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/snare.wav")
+    if (ring_flex >= 0.6)   and (ring_prev < 0.6):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/hi_hat.wav")
+    if (pinky_flex >= 0.6)  and (pinky_prev < 0.6):
+        os.system("aplay /var/lib/cloud9/ENGI301/project_01/hand_clap.wav")
 
 # ------------------------------------------------------------------------
 # Main script
@@ -102,9 +100,34 @@ def print_pots(A_THUMB, A_INDEX, A_MIDDLE, A_RING, A_PINKY):
 if __name__ == '__main__':
     setup()
     print("Synth Glove Testbed Program Start")
+    
+    t_p = 0
+    i_p = 0
+    m_p = 0
+    r_p = 0
+    p_p = 0
 
     while True:
-        print_pots(A_THUMB, A_INDEX, A_MIDDLE, A_RING, A_PINKY)
+        """scale and print the potentiometer signals for testing"""
+        t_f = float(ADC.read(A_THUMB))
+        i_f = float(ADC.read(A_INDEX))
+        m_f = float(ADC.read(A_MIDDLE))
+        r_f = float(ADC.read(A_RING))
+        p_f = float(ADC.read(A_PINKY))
+        
+        """debugging display"""
+        if (debug):
+            print("thumb = {0}; index = {1}; middle = {2}; ring = {3}; pinky = {4}".format(t_f, i_f, m_f, r_f, p_f))
+        
+        play_sounds(t_f, t_p, i_f, i_p, m_f, m_p, r_f, r_p, p_f, p_p)
+        
+        """store previous values for next step"""
+        t_p = t_f
+        i_p = i_f
+        m_p = m_f
+        r_p = r_f
+        p_p = p_f
+        
         time.sleep(update_time)
 
-    print("Servo Control Program Finished")
+    print("Synth Glove Testbed Program Finished")
