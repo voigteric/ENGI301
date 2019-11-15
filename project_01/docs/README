@@ -16,5 +16,5 @@ The project_01 folder also contains audio files which are called by the glove to
 INSTRUCTIONS FOR USE:
 1. Clone this repository in /var/lib/cloud9/ for the PocketBeagle
 2. Assemble glove and connections to PocketBeagle
-3. Run program on PocketBeagle and play glove, making adjustments to play_sounds() within instrument_glove.py to tune bend thresholds and audio file destinations
+3. Run instrument_glove.py on PocketBeagle and play glove, making adjustments to play_sounds() within instrument_glove.py to tune bend thresholds and audio file destinations
 4. Make some music!
