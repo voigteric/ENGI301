@@ -1,0 +1,20 @@
+INSTRUMENT GLOVE
+by ERIC VOIGT
+
+Project for PocketBeagle which uses Python to play instrument audio files when a user bends their fingers.
+Please visit https://www.hackster.io/eric-voigt/instrument-glove-4537b7 for a complete tutorial and build instructions.
+
+IMPLEMENTATION FILES:
+instrument_glove.py -- the main program which runs the instrument glove
+run.sh -- startup script which runs instrument_glove.py on reboot
+
+To autoboot run.sh, install these files and then add line to crontab:
+@reboot sleep 30 && sh /var/lib/cloud9/project_01/run.sh > /var/lib/cloud9/project_01/logs/cronlog 2>&1
+
+The project_01 folder also contains audio files which are called by the glove to play through headphones.
+
+INSTRUCTIONS FOR USE:
+1. Clone this repository in /var/lib/cloud9/ for the PocketBeagle
+2. Assemble glove and connections to PocketBeagle
+3. Run program on PocketBeagle and play glove, making adjustments to play_sounds() within instrument_glove.py to tune bend thresholds and audio file destinations
+4. Make some music!
