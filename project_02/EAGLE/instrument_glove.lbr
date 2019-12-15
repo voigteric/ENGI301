@@ -607,6 +607,7 @@ chip</description>
 </devices>
 </deviceset>
 <deviceset name="POCKETBEAGLE" prefix="U">
+<description>BeagleBoard PocketBeagle</description>
 <gates>
 <gate name="G$1" symbol="POCKETBEAGLE" x="-10.16" y="-78.74"/>
 </gates>
