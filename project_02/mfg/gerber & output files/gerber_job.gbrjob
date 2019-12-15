@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-12-15T03:11:37Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.5.1"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.53,
+        "LayerNumber": 4,
+        "Name": {
+            "ProjectId": "instrument_glove"
+        },
+        "Owner": "Eric Voigt <ericvoigt@rice.edu>",
+        "Size": {
+            "X": 61.214,
+            "Y": 66.04
+        }
+    }
+}

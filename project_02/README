@@ -1,0 +1,14 @@
+INSTRUMENT GLOVE PRINTED CIRCUIT BOARD
+by ERIC VOIGT
+
+A printed circuit board and manufacturing information for the instrument glove project (project_01)
+Please visit https://www.hackster.io/eric-voigt/instrument-glove-4537b7 for a complete tutorial and build instructions.
+
+IMPLEMENTATION FILES:
+instrument_glove.lbr -- EAGLE library containing instrument glove components
+instrument_glove.brd -- EAGLE board (layout for project)
+instrument_glove.sch -- EAGLE schematic
+
+MANUFACTURING FILES:
+DRU & CAM files used in Eagle for layout
+Gerber & other mfg output files located in "gerber & output files" -- select by file type for a particular viewer

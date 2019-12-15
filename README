@@ -2,4 +2,5 @@ ENGI301
 Description: Repository for ENGI301 course work
 
 assignment_05 -- homework submission for assignment_05
-project_01 -- instrument glove
+project_01 -- instrument glove (embedded systems and hardware)
+project_02 -- instrument glove printed circuit board (EAGLE board, schematic, and library; manufacturing outputs; general documentation)
